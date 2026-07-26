@@ -2697,7 +2697,6 @@
     { name: "Heat Sealing Machine", file: "Packaging Machines.jpg", moq: "1 set", price: "$700–4,000" },
     { name: "Label Application Kit", file: "Packaging Machines.jpg", moq: "1 set", price: "$500–3,500" }
   ];
-  const productBaseUrl = "https://raw.githubusercontent.com/ahmadok12/Shaikh-China-Sourcing/main/Hero%20Products/";
   document.querySelectorAll(".product-row").forEach((row, rowIndex) => {
     const rowProducts = featuredProducts.slice(rowIndex * 8, rowIndex * 8 + 8);
     row.querySelectorAll(".product-set").forEach((set) => {
@@ -2707,9 +2706,12 @@
         const thumb = card.querySelector(".product-thumb");
         const title = card.querySelector(".product-card-copy h3");
         if (thumb) {
+          const currentImage = thumb.querySelector("img");
+          const currentImageSrc = currentImage ? currentImage.getAttribute("src") : "";
+          const currentImageAlt = currentImage ? currentImage.getAttribute("alt") : product.name;
           thumb.innerHTML =
-            '<img src="' + productBaseUrl + encodeURIComponent(product.file) + '" alt="' +
-            product.name.replace(/&/g, "&amp;").replace(/"/g, "&quot;") +
+            '<img src="' + currentImageSrc + '" alt="' +
+            currentImageAlt.replace(/&/g, "&amp;").replace(/"/g, "&quot;") +
             '" width="720" height="720" loading="lazy">' +
             '<div class="product-meta-bar"><span><b>MOQ</b>' + product.moq +
             '</span><span><b>EST.</b>' + product.price + '</span></div>';
